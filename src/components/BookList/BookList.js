@@ -3,7 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Book from "../Book/Book";
 
-const BookList = ({ books, removeBook }) => {
+const BookList = ({ books, removeBook, updateBook }) => {
   const shelves = [];
   for (let i = 0; i < books.length; i += 5) {
     shelves.push(books.slice(i, i + 5));
@@ -15,7 +15,11 @@ const BookList = ({ books, removeBook }) => {
         <Row key={index} className='mb-4'>
           {shelf.map((book) => (
             <Col key={book.id} md={2}>
-              <Book book={book} removeBook={removeBook} />
+              <Book
+                book={book}
+                removeBook={removeBook}
+                updateBook={updateBook}
+              />
             </Col>
           ))}
         </Row>
