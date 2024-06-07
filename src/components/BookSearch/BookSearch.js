@@ -4,8 +4,10 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 
-const BookSearch = ({ addBook, searchResults, setSearchResults }) => {
+const BookSearch = ({ addBook }) => {
   const [query, setQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [showResults, setShowResults] = useState(false);
 
   const searchBooks = async (e) => {
     e.preventDefault();
@@ -14,6 +16,7 @@ const BookSearch = ({ addBook, searchResults, setSearchResults }) => {
     );
     const data = await response.json();
     setSearchResults(data.items || []);
+    setShowResults(true);
   };
 
   const handleAddBook = (book) => {
@@ -33,6 +36,9 @@ const BookSearch = ({ addBook, searchResults, setSearchResults }) => {
           : null,
     };
     addBook(newBook);
+    setQuery("");
+    setSearchResults([]);
+    setShowResults(false);
   };
 
   return (
@@ -50,31 +56,40 @@ const BookSearch = ({ addBook, searchResults, setSearchResults }) => {
           Search
         </Button>
       </Form>
-      <div>
-        {searchResults.map((book) => (
-          <Card key={book.id} className='mb-3'>
-            <Card.Body>
-              <Card.Img>{book.image}</Card.Img>
-              <Card.Title>{book.volumeInfo.title}</Card.Title>
-              <Card.Subtitle className='mb-2 text-muted'>
-                Author:{" "}
-                {book.volumeInfo.authors
-                  ? book.volumeInfo.authors.join(", ")
-                  : "Unknown"}
-              </Card.Subtitle>
-              <Card.Text>
-                Genre:{" "}
-                {book.volumeInfo.categories
-                  ? book.volumeInfo.categories.join(", ")
-                  : "Unknown"}
-              </Card.Text>
-              <Button variant='success' onClick={() => handleAddBook(book)}>
-                Add to Library
-              </Button>
-            </Card.Body>
-          </Card>
-        ))}
-      </div>
+      {showResults && (
+        <div>
+          {searchResults.map((book) => (
+            <Card key={book.id} className='mb-3'>
+              <Card.Body>
+                {book.volumeInfo.imageLinks &&
+                  book.volumeInfo.imageLinks.smallThumbnail && (
+                    <Card.Img
+                      variant='top'
+                      src={book.volumeInfo.imageLinks.smallThumbnail}
+                      alt={`${book.volumeInfo.title} cover`}
+                    />
+                  )}
+                <Card.Title>{book.volumeInfo.title}</Card.Title>
+                <Card.Subtitle className='mb-2 text-muted'>
+                  Author:{" "}
+                  {book.volumeInfo.authors
+                    ? book.volumeInfo.authors.join(", ")
+                    : "Unknown"}
+                </Card.Subtitle>
+                <Card.Text>
+                  Genre:{" "}
+                  {book.volumeInfo.categories
+                    ? book.volumeInfo.categories.join(", ")
+                    : "Unknown"}
+                </Card.Text>
+                <Button variant='success' onClick={() => handleAddBook(book)}>
+                  Add to Library
+                </Button>
+              </Card.Body>
+            </Card>
+          ))}
+        </div>
+      )}
     </Container>
   );
 };
