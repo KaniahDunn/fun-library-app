@@ -42,9 +42,9 @@ const BookSearch = ({ addBook }) => {
   };
 
   return (
-    <Container>
+    <Container gap={2} className='col-md-5 mx-auto'>
       <Form onSubmit={searchBooks} className='mb-4'>
-        <Form.Group>
+        <Form.Group className='mb-3'>
           <Form.Control
             type='text'
             placeholder='Search for books'

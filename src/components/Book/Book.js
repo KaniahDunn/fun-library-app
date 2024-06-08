@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -50,7 +51,9 @@ const Book = ({ book, removeBook, updateBook }) => {
           </div>
         ) : (
           <div>
-            <Card.Title>{book.title}</Card.Title>
+            <Link to={`/book/${book.id}`}>
+              <Card.Title>{book.title}</Card.Title>
+            </Link>
             <Card.Subtitle className='mb-2 text-muted'>
               Author: {book.author}
             </Card.Subtitle>

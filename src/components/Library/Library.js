@@ -1,15 +1,7 @@
 import React, { useState } from "react";
 import BookList from "../BookList/BookList";
-import BookSearch from "../BookSearch/BookSearch";
-import BookForm from "../BookForm/BookForm";
 
-const Library = ({
-  books,
-  addBook,
-  removeBook,
-  searchResults,
-  setSearchResults,
-}) => {
+const Library = ({ books, removeBook }) => {
   const [bookList, setBookList] = useState(books);
 
   const updateBook = (id, updatedDetails) => {
@@ -22,12 +14,6 @@ const Library = ({
 
   return (
     <div>
-      <BookForm addBook={addBook} />
-      <BookSearch
-        addBook={addBook}
-        searchResults={searchResults}
-        setSearchResults={setSearchResults}
-      />
       <BookList
         books={bookList}
         removeBook={removeBook}

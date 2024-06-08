@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { Stack } from "react-bootstrap";
 
 const BookForm = ({ addBook }) => {
   const [title, setTitle] = useState("");
@@ -16,35 +17,37 @@ const BookForm = ({ addBook }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} className='mb-4'>
-      <Form.Group>
-        <Form.Control
-          type='text'
-          placeholder='Title'
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Control
-          type='text'
-          placeholder='Author'
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Control
-          type='text'
-          placeholder='Genre'
-          value={genre}
-          onChange={(e) => setGenre(e.target.value)}
-        />
-      </Form.Group>
-      <Button type='submit' variant='primary'>
-        Add Book
-      </Button>
-    </Form>
+    <Stack gap={2} className='col-md-5 mx-auto'>
+      <Form onSubmit={handleSubmit} className='mb-4'>
+        <Form.Group className='mb-3'>
+          <Form.Control
+            type='text'
+            placeholder='Title'
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group className='mb-3'>
+          <Form.Control
+            type='text'
+            placeholder='Author'
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group className='mb-3'>
+          <Form.Control
+            type='text'
+            placeholder='Genre'
+            value={genre}
+            onChange={(e) => setGenre(e.target.value)}
+          />
+        </Form.Group>
+        <Button type='submit' variant='primary'>
+          Add Book
+        </Button>
+      </Form>
+    </Stack>
   );
 };
 

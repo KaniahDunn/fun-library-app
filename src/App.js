@@ -7,6 +7,7 @@ import Library from "./components/Library/Library";
 import AddBook from "./components/AddBook/AddBook";
 import "./App.css";
 import BookSearch from "./components/BookSearch/BookSearch";
+import BookDetail from "./components/BookDetail/BookDetail";
 
 const App = () => {
   const [books, setBooks] = useState([
@@ -57,6 +58,7 @@ const App = () => {
               />
             }
           ></Route>
+          <Route path='/book/:id' element={<BookDetail books={books} />} />
         </Routes>
       </Container>
     </Router>
